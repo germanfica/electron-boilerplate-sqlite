@@ -10,9 +10,10 @@
   "main": "app/app.js",
   "build": {
     "appId": "com.example.electron-boilerplate-sqlite",
+    "asar": false,
     "files": [
       "app/**/*",
-      "node_modules/**/*",
+      "!node_modules/**/*",
       "package.json"
     ],
     "win": {
