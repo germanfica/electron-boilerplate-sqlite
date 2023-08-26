@@ -14,13 +14,23 @@
       "app/**/*",
       "node_modules/**/*",
       "package.json"
-    ]
+    ],
+    "win": {
+      "target": ["nsis"]
+    },
+    "mac": {
+      "target": ["dmg"]
+    },
+    "linux": {
+      "target": ["deb"]
+    },
+    "icon": "build/icon.png"
   },
   "scripts": {
     "postinstall": "install-app-deps",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "build"
+    "release": "electron-builder --publish=never"
   },
   "dependencies": {
     "sqlite3": "^4.0.9"
