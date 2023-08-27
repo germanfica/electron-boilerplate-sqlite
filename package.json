@@ -28,7 +28,7 @@
     "icon": "build/icon.png"
   },
   "scripts": {
-    "postinstall": "install-app-deps",
+    "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "electron-builder --publish=never"
