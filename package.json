@@ -10,10 +10,10 @@
   "main": "app/app.js",
   "build": {
     "appId": "com.example.electron-boilerplate-sqlite",
-    "asar": false,
+    "asar": true,
     "files": [
       "app/**/*",
-      "!node_modules/**/*",
+      "node_modules/**/*",
       "package.json"
     ],
     "win": {
@@ -34,10 +34,10 @@
     "release": "electron-builder --publish=never"
   },
   "dependencies": {
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "electron": "^5.0.13",
-    "electron-builder": "^21.0.15"
+    "electron": "^26.1.0",
+    "electron-builder": "^24.6.3"
   }
 }

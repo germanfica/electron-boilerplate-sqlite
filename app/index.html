@@ -7,28 +7,32 @@
     <ul id="database">
     </ul>
     <script>
-      var sqlite3 = require('sqlite3').verbose();
-      var db = new sqlite3.Database(':memory:');
+      const { ipcRenderer } = require('electron');
 
-      db.serialize(function() {
-        db.run("CREATE TABLE lorem (info TEXT)");
+      // Solicitar datos al proceso principal
+      ipcRenderer.send('get-data', 'Hello from renderer');
 
-        var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
-        for (var i = 0; i < 10; i++) {
-          stmt.run("Ipsum " + i);
-        }
-
-        stmt.finalize();
-
-        var rows = document.getElementById("database");
-        db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
+      // Escuchar la respuesta del proceso principal
+      ipcRenderer.on('send-data', (event, rows) => {
+        var ul = document.getElementById("database");
+        rows.forEach(row => {
           var item = document.createElement("li");
-          item.textContent = "" + row.id + ": " + row.info;
-          rows.appendChild(item);
+          item.textContent = `${row.id}: ${row.info}`;
+          ul.appendChild(item);
         });
       });
 
-      db.close();
+      ipcRenderer.send('get-sqlite3-location', 'Hello from renderer');
+      ipcRenderer.on('send-sqlite3-location', (event, data) => {
+        console.log(data);
+      });
+
+      ipcRenderer.send('get-dirname-location', 'Hello from renderer');
+      ipcRenderer.on('send-dirname-location', (event, data) => {
+        console.log(data);
+      });
+
+
     </script>
   </body>
 </html>
